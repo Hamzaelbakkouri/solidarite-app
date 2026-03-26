@@ -12,7 +12,8 @@
       "Bash(npx dotenv:*)",
       "Bash(set -a)",
       "Bash(source .env.local)",
-      "Bash(set +a)"
+      "Bash(set +a)",
+      "Bash(node -e \":*)"
     ]
   }
 }

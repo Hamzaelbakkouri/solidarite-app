@@ -1,6 +1,9 @@
 import { MongoClient } from "mongodb";
 
-const options = {};
+const options = {
+  serverSelectionTimeoutMS: 10000,
+  connectTimeoutMS: 10000,
+};
 
 const globalWithMongo = global as typeof globalThis & {
   _mongoClientPromise?: Promise<MongoClient>;
