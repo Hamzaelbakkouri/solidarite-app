@@ -4,7 +4,15 @@
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm)",
       "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --no-turbopack)",
       "Bash(printf 'No\\\\nYes\\\\n')",
-      "Bash(yes \"\")"
+      "Bash(yes \"\")",
+      "Bash(npm run:*)",
+      "Bash(npm install:*)",
+      "Bash(npx next:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npx dotenv:*)",
+      "Bash(set -a)",
+      "Bash(source .env.local)",
+      "Bash(set +a)"
     ]
   }
 }
