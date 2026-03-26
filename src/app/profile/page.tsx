@@ -98,6 +98,61 @@ export default function ProfilePage() {
           </span>
         </div>
 
+        {/* Personal Info */}
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-4">
+          <h3 className="text-sm font-bold text-gray-700 mb-3 flex items-center gap-2">
+            <User className="w-4 h-4 text-gray-500" />
+            Informations personnelles
+          </h3>
+          <div className="space-y-2.5">
+            {user.phone && (
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                <Phone className="w-4 h-4 text-gray-400 shrink-0" />
+                <span>{user.phone}</span>
+              </div>
+            )}
+            {user.city && (
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                <MapPin className="w-4 h-4 text-gray-400 shrink-0" />
+                <span>{user.city}{user.address ? ` — ${user.address}` : ""}</span>
+              </div>
+            )}
+            {user.birthDate && (
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                <Calendar className="w-4 h-4 text-gray-400 shrink-0" />
+                <span>{new Date(user.birthDate).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
+              </div>
+            )}
+            {user.role === "giver" && user.organization && (
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                <Building className="w-4 h-4 text-gray-400 shrink-0" />
+                <span>{user.organization}</span>
+              </div>
+            )}
+            {user.role === "agent" && user.cin && (
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                <CreditCard className="w-4 h-4 text-gray-400 shrink-0" />
+                <span>CIN: {user.cin}</span>
+              </div>
+            )}
+            {user.role === "agent" && user.availability && (
+              <div className="flex items-center gap-3 text-sm text-gray-600">
+                <Clock className="w-4 h-4 text-gray-400 shrink-0" />
+                <span>{user.availability === "full-time" ? "Temps plein" : user.availability === "part-time" ? "Temps partiel" : user.availability === "weekends" ? "Week-ends" : user.availability === "evenings" ? "Soirs" : "Flexible"}</span>
+              </div>
+            )}
+            {user.role === "agent" && user.skills && (
+              <div className="flex items-start gap-3 text-sm text-gray-600">
+                <Wrench className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
+                <span>{user.skills}</span>
+              </div>
+            )}
+            {!user.phone && !user.city && !user.birthDate && (
+              <p className="text-xs text-gray-400 text-center py-2">Aucune information renseignée</p>
+            )}
+          </div>
+        </div>
+
         {/* Giver Stats + Top Up */}
         {user.role === "giver" && (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 mb-4">

@@ -17,6 +17,10 @@ import {
   ShieldX,
   UserCheck,
   Inbox,
+  Phone,
+  MapPin,
+  CreditCard,
+  Wrench,
 } from "lucide-react";
 
 interface Agent {
@@ -25,6 +29,11 @@ interface Agent {
   email: string;
   agentStatus: string;
   agentDocuments?: string[];
+  phone?: string;
+  city?: string;
+  cin?: string;
+  availability?: string;
+  skills?: string;
 }
 
 interface PendingRequest {
@@ -192,6 +201,42 @@ export default function AdminPage() {
                       {agent.agentStatus === "verified" ? "Verifie" : agent.agentStatus === "rejected" ? "Rejete" : "En attente"}
                     </span>
                   </div>
+                  {/* Agent Details */}
+                  {(agent.phone || agent.city || agent.cin || agent.skills) && (
+                    <div className="mt-2 pt-2 border-t border-gray-100 grid grid-cols-2 gap-x-3 gap-y-1.5">
+                      {agent.cin && (
+                        <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                          <CreditCard className="w-3 h-3 text-gray-400" />
+                          <span>{agent.cin}</span>
+                        </div>
+                      )}
+                      {agent.phone && (
+                        <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                          <Phone className="w-3 h-3 text-gray-400" />
+                          <span>{agent.phone}</span>
+                        </div>
+                      )}
+                      {agent.city && (
+                        <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                          <MapPin className="w-3 h-3 text-gray-400" />
+                          <span>{agent.city}</span>
+                        </div>
+                      )}
+                      {agent.availability && (
+                        <div className="flex items-center gap-1.5 text-[11px] text-gray-500">
+                          <Clock className="w-3 h-3 text-gray-400" />
+                          <span>{agent.availability}</span>
+                        </div>
+                      )}
+                      {agent.skills && (
+                        <div className="flex items-start gap-1.5 text-[11px] text-gray-500 col-span-2">
+                          <Wrench className="w-3 h-3 text-gray-400 mt-0.5 shrink-0" />
+                          <span>{agent.skills}</span>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
                   {/* Documents Preview */}
                   {agent.agentDocuments && agent.agentDocuments.length > 0 && (
                     <div className="mt-2 pt-2 border-t border-gray-100">
