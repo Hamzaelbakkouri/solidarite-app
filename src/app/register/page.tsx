@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import {
   Heart, HandHelping, Mail, Lock, User, AlertCircle, Upload,
   Image, FileText, X, Phone, MapPin, Calendar, Building, Briefcase,
-  Clock, Wrench, CreditCard,
+  CreditCard,
 } from "lucide-react";
 
 const inputClass =
@@ -32,8 +32,6 @@ function RegisterForm() {
 
   // Agent fields
   const [cin, setCin] = useState("");
-  const [availability, setAvailability] = useState("");
-  const [skills, setSkills] = useState("");
   const [files, setFiles] = useState<File[]>([]);
 
   const [error, setError] = useState("");
@@ -73,7 +71,7 @@ function RegisterForm() {
         name, email, password, role, phone, city, address, birthDate,
         agentDocuments,
         ...(role === "giver" && { organization }),
-        ...(role === "agent" && { cin, availability, skills }),
+        ...(role === "agent" && { cin }),
       }),
     });
 
@@ -136,7 +134,7 @@ function RegisterForm() {
                 }`}
               >
                 <HandHelping className={`w-6 h-6 mx-auto mb-1.5 ${role === "agent" ? "text-green-500" : "text-gray-400"}`} />
-                <span className="text-xs font-semibold">Bénévole</span>
+                <span className="text-xs font-semibold">Demandeur</span>
               </button>
             </div>
           </div>
@@ -239,12 +237,12 @@ function RegisterForm() {
             <div className="pt-2 border-t border-gray-100 space-y-3">
               <p className="text-xs font-bold text-green-500 uppercase tracking-wider mb-1 flex items-center gap-1.5">
                 <HandHelping className="w-3.5 h-3.5" />
-                Informations Bénévole
+                Informations Demandeur
               </p>
 
               <div className="flex items-start gap-2 bg-amber-50 p-3 rounded-xl text-xs text-amber-700 border border-amber-100">
                 <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
-                <span>Les comptes Bénévole nécessitent une vérification par l&apos;administrateur.</span>
+                <span>Les comptes Demandeur nécessitent une vérification par l&apos;administrateur.</span>
               </div>
 
               {/* CIN */}
@@ -253,41 +251,6 @@ function RegisterForm() {
                 <div className="relative">
                   <CreditCard className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   <input type="text" required value={cin} onChange={(e) => setCin(e.target.value)} className={inputClass} placeholder="AB123456" />
-                </div>
-              </div>
-
-              {/* Availability */}
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Disponibilité</label>
-                <div className="relative">
-                  <Clock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                  <select
-                    value={availability}
-                    onChange={(e) => setAvailability(e.target.value)}
-                    className={inputClass}
-                  >
-                    <option value="">Choisir...</option>
-                    <option value="full-time">Temps plein</option>
-                    <option value="part-time">Temps partiel</option>
-                    <option value="weekends">Week-ends uniquement</option>
-                    <option value="evenings">Soirs uniquement</option>
-                    <option value="flexible">Flexible</option>
-                  </select>
-                </div>
-              </div>
-
-              {/* Skills */}
-              <div>
-                <label className="block text-xs font-medium text-gray-600 mb-1">Compétences / Expérience</label>
-                <div className="relative">
-                  <Wrench className="absolute left-3.5 top-3 w-4 h-4 text-gray-400" />
-                  <textarea
-                    value={skills}
-                    onChange={(e) => setSkills(e.target.value)}
-                    rows={2}
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none bg-gray-50 transition-colors focus:bg-white text-sm resize-none"
-                    placeholder="Ex: Distribution alimentaire, logistique, transport..."
-                  />
                 </div>
               </div>
 
